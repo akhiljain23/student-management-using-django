@@ -236,13 +236,15 @@ def student_enroll_activity(request, activity_id):
     student = get_object_or_404(Student, admin=request.user)
     activity = Activity.objects.get(id=activity_id)
     try:
-        enrollment = ActivityStudent()
-        enrollment.activity = activity
-        enrollment.student = student
-        enrollment.status = 0
-        enrollment.save()
-        time.sleep(2)
-        messages.success(request,"Successfully Applied")
+        stu_status = ActivityStudent.objects.filter(student=student, activity=activity).values()
+        if len(stu_status) == 0:
+            enrollment = ActivityStudent()
+            enrollment.activity = activity
+            enrollment.student = student
+            enrollment.status = 0
+            enrollment.save()
+            time.sleep(2)
+            messages.success(request,"Successfully Applied")
         activities = Activity.objects.all().values()
         for x in range(len(activities)):
             stu_status = ActivityStudent.objects.filter(student=student, activity=activities[x]['id']).values()

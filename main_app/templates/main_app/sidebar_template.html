@@ -363,6 +363,17 @@
                 </li>
 
                 <li class="nav-item">
+                    {% url 'staff_list_activity' as staff_list_activity %}
+                    <a href="{{staff_list_activity}}" class="nav-link {% if staff_list_activity == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                           Manage Activity
+
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     {% url 'staff_feedback' as staff_feedback %}
                     <a href="{{staff_feedback}}" class="nav-link {% if staff_feedback == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>

@@ -117,6 +117,12 @@ urlpatterns = [
          name='edit_student_result'),
     path('staff/result/fetch/', staff_views.fetch_student_result,
          name='fetch_student_result'),
+    path('staff/list/activity/', staff_views.staff_list_activity,
+         name='staff_list_activity'),
+    path('staff/list/activity/request/<int:activity_id>', staff_views.staff_list_activity_request,
+         name='staff_list_activity_request'),
+    path('staff/respond/activity/request/<int:relation_id>/<str:status>', staff_views.staff_respond_activity_request,
+         name='staff_respond_activity_request'),
 
 
 
