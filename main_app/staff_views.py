@@ -323,9 +323,10 @@ def staff_list_activity(request):
     return render(request, "staff_template/staff_view_activities.html", context)
 
 def staff_list_activity_request(request, activity_id):
-    staff = get_object_or_404(Staff, admin=request.user)
     pending_requests = ActivityStudent.objects.filter(activity_id=activity_id, status=0)
+    activity_name = Activity.objects.get(id=activity_id).name
     context = {
+        'activity': activity_name,
         'pending_requests': pending_requests,
         'page_title': "Activity Request"
     }
