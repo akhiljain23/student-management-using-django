@@ -20,7 +20,7 @@
            <tr>
                <th>ID</th>
                <th>Activity</th>
-               <th>Organiser</th>
+               <!-- <th>Organiser</th> -->
                <th>Time</th>
                <th>Venue</th>
                <th>Slots</th>
@@ -30,7 +30,7 @@
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{ activity.name }}</td>
-            <td>{{ activity.organiser }}</td>
+            <!-- <td>{{ activity.organiser.admin }}</td> -->
             <td>{{ activity.date_time }}</td>
             <td>{{ activity.venue }}</td>
             <td>{{ activity.slots }}</td>
@@ -40,8 +40,8 @@
             <td><span  class='badge badge-danger'>Rejected</span></td>
             {% elif activity.status == 0 %}
             <td><span class="badge badge-warning">Pending</span></td>
-            <!-- {% elif activity.status == -2 %}
-            <td><a href="{% url 'student_enroll_activity' activity.id %}" class="btn btn-primary">Enroll</a></td> -->
+            {% elif activity.status == -2 %}
+            <td><a href="{% url 'student_enroll_activity' activity.id %}" class="btn btn-primary">Enroll</a></td>
             {% endif %}    
         </tr>
             {% endfor %}
