@@ -1,0 +1,54 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}} for {{ pending_requests.activity.name }}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group table">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Student Name</th>
+                                    <th>Avatar</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for req in pending_requests %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{ req.student.admin }}</td>
+                                        <td>
+                                            {% if req.student.admin.profile_pic == ""  %}
+                                            No Image
+                                            {% else %}
+                                            <img class="img img-fluid mb-2" height="100" width="100"
+                                                src="{{req.student.admin.profile_pic}}" alt="">
+                                            {% endif %}
+                                        </td>
+                                        <td><a href="{% url 'staff_respond_activity_request' req.id 'approve' %}" class="btn btn-primary">Approve</a> -
+                                            <a href="{% url 'staff_respond_activity_request' req.id 'reject' %}" class="btn btn-danger" onclick="return confirm('Are you sure about this ?')">Reject</a>    
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>    
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+

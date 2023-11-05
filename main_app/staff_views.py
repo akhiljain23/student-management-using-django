@@ -1,4 +1,5 @@
 import json
+import time
 
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
@@ -310,3 +311,42 @@ def fetch_student_result(request):
         return HttpResponse(json.dumps(result_data))
     except Exception as e:
         return HttpResponse('False')
+
+
+def staff_list_activity(request):
+    staff = get_object_or_404(Staff, admin=request.user)
+    acitivities = Activity.objects.filter(organiser=staff)
+    context = {
+        'acitivities': acitivities,
+        'page_title': "View Activities"
+    }
+    return render(request, "staff_template/staff_view_activities.html", context)
+
+def staff_list_activity_request(request, activity_id):
+    staff = get_object_or_404(Staff, admin=request.user)
+    pending_requests = ActivityStudent.objects.filter(activity_id=activity_id, status=0)
+    context = {
+        'pending_requests': pending_requests,
+        'page_title': "Activity Request"
+    }
+    return render(request, "staff_template/staff_activity_requests.html", context)
+
+
+def staff_respond_activity_request(request, relation_id, status):
+    try:
+        enrollment = ActivityStudent.objects.get(id=relation_id)
+        if status == "approve":
+            enrollment.status = 1
+        elif status == "reject":
+            enrollment.status = -1
+        enrollment.save()
+        time.sleep(2)
+        messages.success(request,"Successfully Applied")
+        pending_requests = ActivityStudent.objects.filter(activity_id=enrollment.activity.id, status=0)
+        context = {
+            'pending_requests': pending_requests,
+            'page_title': "Activity Request"
+        }
+        return render(request, "staff_template/staff_activity_requests.html", context)
+    except Exception as e:
+        messages.error(request, "Unable to respond for activity " + str(e))

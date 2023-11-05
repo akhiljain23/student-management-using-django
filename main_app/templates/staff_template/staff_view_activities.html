@@ -1,0 +1,49 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group table">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Activity</th>
+                                    <th>Time</th>
+                                    <th>Venue</th>
+                                    <th>Slots</th>
+                                    <th>Pending Requests</th>
+                                </tr>
+                                {% for activity in acitivities %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{ activity.name }}</td>
+                                        <td>{{ activity.date_time }}</td>
+                                        <td>{{ activity.venue }}</td>
+                                        <td>{{ activity.slots }}</td>
+                                        <td><a href="{% url 'staff_list_activity_request' activity.id %}" class="btn btn-primary">Review Requests</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>    
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
