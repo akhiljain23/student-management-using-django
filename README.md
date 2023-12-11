@@ -56,6 +56,7 @@ https://smswithdjango.herokuapp.com/
 |<img src="ss/admin4.png" width="400">|<img src="ss/staff4.png" width="400">|<img src="ss/student4.png" width="400">|
 |<img src="ss/admin1.png" width="400">|<img src="ss/staff5.png" width="400">|<img src="ss/student5.png" width="400">|
 |<img src="ss/admin6.png" width="400">|<img src="ss/staff6.png" width="400">|<img src="ss/student6.png" width="400">|
+|<img src="ss/admin7.png" width="400">|<img src="ss/staff7.png" width="400">|<img src="ss/student7.png" width="400">|
 
 
 
@@ -247,6 +248,7 @@ Password: student
 - [x] Student View Result
 - [x] Change all links to be dynamic
 - [x] Code Restructure - Very Important
+- [x] Extra Curricular Activities
 
 
 ## Questions I asked While Developing This
